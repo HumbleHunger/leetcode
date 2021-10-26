@@ -1,5 +1,22 @@
 {
 	"files.associations": {
-		"iostream": "cpp"
+		"iostream": "cpp",
+		"array": "cpp",
+		"*.tcc": "cpp",
+		"bitset": "cpp",
+		"deque": "cpp",
+		"forward_list": "cpp",
+		"list": "cpp",
+		"string": "cpp",
+		"unordered_map": "cpp",
+		"unordered_set": "cpp",
+		"vector": "cpp",
+		"string_view": "cpp",
+		"initializer_list": "cpp",
+		"map": "cpp",
+		"scoped_allocator": "cpp",
+		"set": "cpp",
+		"sstream": "cpp",
+		"regex": "cpp"
 	}
 }
