@@ -15,28 +15,35 @@ struct TreeNode {
 
 class Solution {
 public:
-		void f(TreeNode* node, int& count, bool& ret, int& target)
+		int i = 0;
+		vector<int> path;
+		void f(TreeNode* node, int& count, vector<vector<int>>& ret, int& target)
 		{
 				count += node->val;
-				if (node && !node->left && !node->right || ret)
+				path.push_back(node->val);
+				if (node && !node->left && !node->right)
 				{
-					if (count == target) ret = true;
+					if (count == target)
+					{
+						ret.push_back(path);
+					}
 					return;
 				}
 
 				if (node->left) {
 					f(node->left, count, ret, target);
 					count -= node->left->val;
+					path.pop_back();
 				}
 				if (node->right) {
 					f(node->right, count, ret, target);
 					count -= node->right->val;
+					path.pop_back();
 				}
 		}
-
-    bool hasPathSum(TreeNode* root, int targetSum) {
+		vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
 				int count = 0;
-				bool ret = 0;
+				vector<vector<int>> ret;
 				if(root) f(root, count, ret, targetSum);
 				return ret;
     }	
