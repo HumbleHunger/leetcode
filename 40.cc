@@ -8,9 +8,6 @@ public:
 		vector<int> path;
 
 		void backtracking(vector<int>& nums, int target, int start, int sum, vector<bool>& used) {
-			if (sum > target) {
-				return;
-			}
 			if (sum == target) {
 				ret.push_back(path);
 				return;
@@ -33,6 +30,6 @@ public:
 			vector<bool> used(candidates.size(), false);
 			sort(candidates.begin(), candidates.end());
 			backtracking(candidates, target, 0, 0, used);
-			return ret;;
+			return ret;
     }
 };
