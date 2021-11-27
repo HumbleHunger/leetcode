@@ -7,26 +7,23 @@ public:
     vector<vector<int>> ret;
 		vector<int> path;
 
-		void backtracking(vector<int>& nums, vector<bool>& used, int start) {
+		void backtracking(vector<int>& nums, int start) {
 			ret.push_back(path);
 			if (start > nums.size()) {
 				return;
 			}
 
 			for (int i = start; i < nums.size(); ++i) {
-				if (used[i - 1] == false && nums[i] == nums[i - 1]) continue;
+				if (i > start && nums[i] == nums[i - 1]) continue;
 				path.push_back(nums[i]);
-				used[i] = true;
-				backtracking(nums, used, i + 1);
-				used[i] = false;
+				backtracking(nums, i + 1);
 				path.pop_back();
 			}
 		}
 
 		vector<vector<int>> subsetsWithDup(vector<int>& nums) {
 			sort(nums.begin(), nums.end());
-			vector<bool> used(nums.size(), false);
-			backtracking(nums, used, 0);
+			backtracking(nums, 0);
 			return ret;
     }
 };
