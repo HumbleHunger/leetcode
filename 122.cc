@@ -5,69 +5,35 @@ using namespace std;
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
-			
-			int mark = 0;
-			int in = 0;
-			int out = 0;
-			int ret = 0;
-			int pre = 0;
-			int cur = 0;
-
-			int start = 0;
-			pre = prices[1] - prices[0];
-			if (pre > 0) prices.push_back(INT32_MAX);
-			else prices.push_back(INT32_MIN);
-			for (int i = 1; i < prices.size() - 1; ++i) {
-				cur = prices[i + 1] - prices[i];
-				// 递增改变
-				if ((cur > 0 && pre < 0) || (cur < 0 && pre > 0) || i == prices.size() - 2) {
-					// pre是递增
-					if (pre >= 0) {
-						// 买
-						if (mark == 0) {
-							in = prices[start];
-							cout << "买入" << in << endl;
-							start = start + 1;;
-							i = start;
-							mark = 1;
-						} else {
-						// 卖
-							out = prices[i];
-							cout << "买出" << out << endl;
-							ret += out - in;
-							start = i + 1;
-							mark = 0;
-						}
-					} else {
-						// pre是递减
-						// 买
-						if (mark == 0) {
-							in = prices[i];
-							cout << "买入" << in << endl;
-							start = i + 1;
-							mark = 1;
-						} else {
-						// 卖
-							out = prices[start];
-							cout << "买出" << out << endl;
-							start = start + 1;
-							i = start;
-							ret += out - in;
-							mark = 0;
-						}
-					}
-					pre = cur;
-				}
+			vector<int> dp(prices.size(), 0);
+			vector<int> p(prices.size(), 0);
+			for (int i = 1; i < p.size(); ++i) {
+				p[i] = prices[i] - prices[i - 1];
 			}
-			return ret;
-    }
+			dp[0] = 0;
+			for (int i = 1; i < dp.size(); ++i) {
+				dp[i] = max(dp[i - 1], dp[i - 1] + p[i]);
+			}
+			return dp.back();
+		}
 };
 
-int main() {
-	Solution s;
-	vector<int> v({1,2,3,4,5});
-	s.maxProfit(v);
-}
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+			// dp是所得最大现金
+			vector<vector<int>> dp(prices.size(), vector<int>({0, 0}));
+			dp[0][0] = -prices[0];
+
+			for (int i = 1; i < prices.size(); ++i) {
+				dp[i][0] = max(dp[i - 1][1] - prices[i], dp[i - 1][0]);
+				dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] + prices[i]);
+			}
+
+			return max(dp.back()[0], dp.back()[1]);
+		}
+};
+
 
 class Solution {
 public:
