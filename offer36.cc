@@ -35,6 +35,7 @@ public:
 			root->left = pre;
 			if (pre) pre->right = root;
 			pre = root;
+			cout << root->val << endl;
 
 			treeToDoublyList(root->right);
 			return root;
