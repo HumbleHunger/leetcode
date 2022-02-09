@@ -26,6 +26,9 @@ public:
 							while (nums[left] == nums[left + 1]) left++;
 							// right去重
 							while (nums[right] == nums[right - 1]) right--;
+
+							left++;
+							right--;
 						}
 					}
 				}
