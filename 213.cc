@@ -28,7 +28,7 @@ public:
         int result1 = robf(nums1); // 情况二
         int result2 = robf(nums2); // 情况三
         return max(result1, result2);
-		}
+	}
 };
 
 int main() {
